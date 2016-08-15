@@ -1,0 +1,29 @@
+<th:block th:fragment="mensagens">
+	<div class="col-md-12" th:if="${success != null}">
+		<div class="alert alert-success">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<span th:text="${success}"></span>
+		</div>
+	</div>
+
+	<div class="col-md-12" th:if="${warning != null}">
+		<div class="alert alert-warning">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<span th:text="${warning}"></span>
+		</div>
+	</div>
+
+	<div class="col-md-12" th:if="${error != null}">
+		<div class="alert alert-danger">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<span th:text="${error}"></span>
+		</div>
+	</div>
+
+	<div class="col-md-12" th:if="${info != null}">
+		<div class="alert alert-info">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<span th:text="${info}"></span>
+		</div>
+	</div>
+</th:block>

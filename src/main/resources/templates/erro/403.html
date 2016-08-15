@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="../css/base/bootstrap.css" th:href="@{css/base/bootstrap.css}" rel="stylesheet" media="screen"/>
+    <link href="../css/fonts/font-awesome.min.css" th:href="@{css/fonts/font-awesome.min.css}" rel="stylesheet"/>
+    <script src="../js/base/jquery-2.2.4.js" th:src="@{js/base/jquery-2.2.4.js}"></script>
+
+    <title>Acesso Negado</title>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-lg-12">
+            <div class="centering text-center error-container">
+                <div class="text-center">
+                    <h2 class="without-margin">Não se preocupe. É apenas um erro <span class="text-warning"><big>403</big></span> .</h2>
+                    <h4 class="text-warning">Acesso Negado.</h4>
+                </div>
+                <hr>
+                <ul class="pager">
+                    <li><a th:href="@{/home}">Voltar para Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="base/head-padrao-css-js :: header"/>
+    <script src="/js/usuarios/gerenciadorusuarios.js" th:src="@{/js/usuarios/gerenciadorusuarios.js}"></script>
+</head>
+<body>
+<th:block th:include="base/menu :: menu"/>
+
+<div id="page-wrapper">
+    <div class="col-lg-12">
+        <h1 class="page-header">Usuários</h1>
+        <th:block th:substituteby="base/mensagens :: mensagens"></th:block>
+        <div id="usuariosTableToolbar">
+            <a class="btn btn-primary" sec:authorize-url="/usuarios/cadastro/novo" th:href="@{/usuarios/cadastro/novo}" role="button"><i class="fa fa-plus"/> Novo
+                Usuário</a>
+        </div>
+        <table id="usuariosTable" data-toggle="table" data-toolbar="#usuariosTableToolbar" data-page-size="5"
+               data-page-list="[5,10,20]" data-pagination="true" data-search="true" data-show-columns="true">
+            <thead>
+            <tr>
+                <th data-sortable="true" data-field="id">Código</th>
+                <th data-sortable="true" data-field="name">Name</th>
+                <th data-sortable="true" data-field="login">Login</th>
+                <th data-sortable="true" data-field="email">Email</th>
+                <th data-sortable="true" data-field="admin">Admin</th>
+                <th data-sortable="true" data-field="ativo">Ativo</th>
+                <th data-sortable="true" data-field="ultimoAcesso">Último Acesso</th>
+                <th data-halign="center" data-align="center">Editar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${listUsuarios}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.nome}"></td>
+                <td th:text="${user.login}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.admin}=='S'?'Sim':'Não'"></td>
+                <td th:text="${user.ativo}=='S'?'Sim':'Não'"></td>
+                <td th:text="${user.ultimoAcesso}"></td>
+                <td><a sec:authorize-url="/usuarios/cadastro" th:href="@{/usuarios/cadastro} + '?id=' + ${user.id}"><i class="fa fa-pencil"/></a></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(listUsuarios)}">
+                <td colspan="8">Nenhum Usuário Cadastrado.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

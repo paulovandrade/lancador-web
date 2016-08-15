@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="base/head-padrao-css-js :: header"/>
+    <script src="/js/eventos/gerenciadoreventos.js" th:src="@{/js/eventos/gerenciadoreventos.js}"></script>
+</head>
+<body>
+<th:block th:include="base/menu :: menu"/>
+
+<div id="page-wrapper">
+    <div class="col-lg-12">
+        <h1 class="page-header">Eventos</h1>
+        <th:block th:substituteby="base/mensagens :: mensagens"></th:block>
+        <div id="eventosTableToolbar">
+            <a class="btn btn-primary" sec:authorize-url="/eventos/cadastro/novo" th:href="@{/eventos/cadastro/novo}" role="button"><i class="fa fa-plus"/> Novo Evento</a>
+        </div>
+        <table id="eventosTable" data-toggle="table" data-toolbar="#eventosTableToolbar" data-page-size="5"
+               data-page-list="[5,10,20]" data-pagination="true" data-search="true" data-show-columns="true">
+            <thead>
+            <tr>
+                <th data-sortable="true" data-field="id">Código</th>
+                <th data-sortable="true" data-field="descricao">Descrição</th>
+                <th data-sortable="true" data-field="url">URL</th>
+                <th data-sortable="true" data-field="ativo">Ativo</th>
+                <th data-halign="center" data-align="center">Editar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="evento: ${listEventos}">
+                <td th:text="${evento.id}"></td>
+                <td th:text="${evento.descricao}"></td>
+                <td th:text="${evento.url}"></td>
+                <td th:text="${evento.ativa}=='S'?'Sim':'Não'"></td>
+                <td><a sec:authorize-url="/eventos/cadastro" th:href="@{/eventos/cadastro/} + '?id=' + ${evento.id}"><i class="fa fa-pencil"/></a></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(listEventos)}">
+                <td colspan="5">Nenhum Evento Cadastrado.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

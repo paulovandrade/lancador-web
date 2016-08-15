@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="base/head-padrao-css-js :: header"/>
+</head>
+<body>
+<th:block th:include="base/menu :: menu"/>
+<div id="page-wrapper">
+    <div class="col-lg-12">
+        <h1 class="page-header" th:text="${titulo}"></h1>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/permissoes}">Permissões</a></li>
+            <li class="active" th:text="${titulo}"></li>
+        </ol>
+        <th:block th:substituteby="base/mensagens :: mensagens"></th:block>
+        <form th:action="@{/permissoes/cadastro/save}" th:object="${permissao}" method="post" data-toggle="validator" role="form">
+            <div class="form-group">
+                <label for="id">Código :</label>
+                <input type="number" class="form-control" id="id" th:field="*{id}" readonly="readonly" required="required"/>
+            </div>
+            <div class="form-group">
+                <label for="usuario">Usuário :</label>
+                <input type="text" class="form-control" id="usuario" th:field="*{nomeUsuario}" readonly="readonly" required="required"/>
+            </div>
+            <div class="form-group">
+                <label for="evento">Evento :</label>
+                <input type="text" class="form-control" id="evento" th:field="*{nomeEvento}" readonly="readonly" required="required"/>
+            </div>
+            <div class="form-group">
+                <label for="url">URL :</label>
+                <input type="text" class="form-control" id="url" th:field="*{urlEvento}" readonly="readonly" required="required"/>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="ativo" th:field="*{permite}" th:checked="true"/> Permite Acesso?
+                </label>
+            </div>
+            <button sec:authorize-url="/permissoes/cadastro/save" type="submit" class="btn btn-success"><i class="fa fa-check"/> Salvar</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="../css/base/bootstrap.css" th:href="@{css/base/bootstrap.css}" rel="stylesheet" media="screen"/>
+    <link href="../css/fonts/font-awesome.min.css" th:href="@{css/fonts/font-awesome.min.css}" rel="stylesheet"/>
+    <script src="../js/base/jquery-2.2.4.js" th:src="@{js/base/jquery-2.2.4.js}"></script>
+
+    <title>Lançador Web</title>
+
+    <style type="text/css">
+        .panel-info > .panel-heading {
+            color: black;
+            background-color: white;
+            border-color: white;
+        }
+
+        .panel-info > .panel-heading {
+            background-image: none;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" th:action="@{/login}" method="post" autocomplete="off">
+        <div class="jumbotron" style="background-color: white; margin-top: 10%">
+            <div class="container">
+                <div id="loginbox" style="margin-top: 8%;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title text-center" style="font-size: 25px;">Login</div>
+                        </div>
+                        <div class="panel-body">
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="text" id="username" name="username" class="form-control required" placeholder="Usuário" minlength="3" maxlength="80" autofocus="true"/>
+                            </div>
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password" id="password" name="password" class="form-control required" placeholder="Senha" maxlength="80" value=""/>
+                            </div>
+                            <!--<div style="margin-bottom: 20px" class="checkbox pull-right">
+                                <label>
+                                    <input type="checkbox" name="remember-me" /> Manter Conectado
+                                </label>
+                            </div>-->
+                            <span style="margin-bottom: 25px" th:if="${param.error}" class="help-block">Usuário e(ou) Senha Inválido(s)!</span>
+                            <span style="margin-bottom: 25px" th:if="${param.logout}" class="help-block">Logout Realizado com Sucesso!</span>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

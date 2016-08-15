@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="base/head-padrao-css-js :: header"/>
+    <script src="/js/permissoes/gerenciadorpermissoes.js" th:src="@{/js/permissoes/gerenciadorpermissoes.js}"></script>
+</head>
+<body>
+<th:block th:include="base/menu :: menu"/>
+
+<div id="page-wrapper">
+    <div class="col-lg-12">
+        <h1 class="page-header">Permissões</h1>
+        <th:block th:substituteby="base/mensagens :: mensagens"></th:block>
+        <!--<div id="permissoesTableToolbar">
+            <a class="btn btn-primary" th:href="@{/permissoes/cadastro}" role="button"><i class="fa fa-plus"/> Nova
+                Permissão</a>
+        </div>-->
+        <table id="permissoesTable" data-toggle="table" data-toolbar="#permissoesTableToolbar" data-page-size="5"
+               data-page-list="[5,10,20]" data-pagination="true" data-search="true" data-show-columns="true"
+               data-filter-control="true" data-filter-show-clear="true">
+            <thead>
+            <tr>
+                <th data-sortable="true" data-field="id">Código</th>
+                <th data-sortable="true" data-filter-control="select" data-field="usuario">Usuário</th>
+                <th data-sortable="true" data-field="descricao">Descrição</th>
+                <th data-sortable="true" data-filter-control="select" data-field="url" >URL</th>
+                <th data-sortable="true" data-field="permite">Permite</th>
+                <th data-halign="center" data-align="center">Editar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="permissao: ${listPermissoes}">
+                <td th:text="${permissao.id}"></td>
+                <td th:text="${permissao.usuario.nome}"></td>
+                <td th:text="${permissao.evento.descricao}"></td>
+                <td th:text="${permissao.evento.url}"></td>
+                <td th:text="${permissao.permite}=='S'?'Sim':'Não'"></td>
+                <td><a sec:authorize-url="/permissoes/cadastro" th:href="@{/permissoes/cadastro/} + '?id=' + ${permissao.id}"><i class="fa fa-pencil"/></a></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(listPermissoes)}">
+                <td colspan="6">Nenhuma Permissão Cadastrada.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
