@@ -26,12 +26,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="evento: ${listEventos}">
-                <td th:text="${evento.id}"></td>
-                <td th:text="${evento.descricao}"></td>
-                <td th:text="${evento.url}"></td>
-                <td th:text="${evento.ativa}=='S'?'Sim':'Não'"></td>
-                <td><a sec:authorize-url="/eventos/cadastro" th:href="@{/eventos/cadastro/} + '?id=' + ${evento.id}"><i class="fa fa-pencil"/></a></td>
+            <tr th:each="evento: ${listEventos}" th:object="${evento}">
+                <td th:text="*{id}"></td>
+                <td th:text="*{descricao}"></td>
+                <td th:text="*{url}"></td>
+                <td th:text="*{ativa}=='S'?'Sim':'Não'"></td>
+                <td><a sec:authorize-url="/eventos/cadastro" th:href="@{/eventos/cadastro/} + '?id=' + *{id}"><i class="fa fa-pencil"/></a></td>
             </tr>
             <tr th:if="${#lists.isEmpty(listEventos)}">
                 <td colspan="5">Nenhum Evento Cadastrado.</td>

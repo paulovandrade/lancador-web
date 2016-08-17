@@ -17,9 +17,10 @@ public class Evento implements Serializable{
     public Evento() {
     }
 
-    public Evento(String descricao, String url, Character ativa) {
+    public Evento(String descricao, String url, String icone, Character ativa) {
         this.descricao = descricao;
         this.url = url;
+        this.icone = icone;
         this.ativa = ativa;
     }
 

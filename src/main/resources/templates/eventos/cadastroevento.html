@@ -30,6 +30,16 @@
                        placeholder="URL do Evento" required="required"/>
                 <div class="help-block with-errors"></div>
             </div>
+            <div class="form-group">
+                <label>Ícone</label>
+                <input class="form-control icp icp-auto" th:field="*{icone}" value="" type="text" />
+            </div>
+            <div class="form-group">
+                <label>Demonstração do Ícone</label>
+                <p class="lead">
+                    <i class="fa fa-3x picker-target"></i>
+                </p>
+            </div>
             <div class="checkbox">
                 <label>
                     <input type="checkbox" id="ativo" th:field="*{ativa}" th:checked="true"/> Ativo?
@@ -39,5 +49,15 @@
         </form>
     </div>
 </div>
+<script>
+    $(function() {
+        $('.icp-auto').iconpicker();
+        $('.icp').on('iconpickerSelected', function(e) {
+            $('.lead .picker-target').get(0).className = 'picker-target fa-3x ' +
+                    e.iconpickerInstance.options.iconBaseClass + ' ' +
+                    e.iconpickerInstance.getValue(e.iconpickerValue);
+        });
+    });
+</script>
 </body>
 </html>

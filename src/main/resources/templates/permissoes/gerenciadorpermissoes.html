@@ -29,13 +29,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="permissao: ${listPermissoes}">
-                <td th:text="${permissao.id}"></td>
-                <td th:text="${permissao.usuario.nome}"></td>
-                <td th:text="${permissao.evento.descricao}"></td>
-                <td th:text="${permissao.evento.url}"></td>
-                <td th:text="${permissao.permite}=='S'?'Sim':'Não'"></td>
-                <td><a sec:authorize-url="/permissoes/cadastro" th:href="@{/permissoes/cadastro/} + '?id=' + ${permissao.id}"><i class="fa fa-pencil"/></a></td>
+            <tr th:each="permissao: ${listPermissoes}" th:object="${permissao}">
+                <td th:text="*{id}"></td>
+                <td th:text="*{usuario.nome}"></td>
+                <td th:text="*{evento.descricao}"></td>
+                <td th:text="*{evento.url}"></td>
+                <td th:text="*{permite}=='S'?'Sim':'Não'"></td>
+                <td><a sec:authorize-url="/permissoes/cadastro" th:href="@{/permissoes/cadastro/} + '?id=' + *{id}"><i class="fa fa-pencil"/></a></td>
             </tr>
             <tr th:if="${#lists.isEmpty(listPermissoes)}">
                 <td colspan="6">Nenhuma Permissão Cadastrada.</td>

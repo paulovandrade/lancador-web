@@ -30,15 +30,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user: ${listUsuarios}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.nome}"></td>
-                <td th:text="${user.login}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.admin}=='S'?'Sim':'Não'"></td>
-                <td th:text="${user.ativo}=='S'?'Sim':'Não'"></td>
-                <td th:text="${user.ultimoAcesso}"></td>
-                <td><a sec:authorize-url="/usuarios/cadastro" th:href="@{/usuarios/cadastro} + '?id=' + ${user.id}"><i class="fa fa-pencil"/></a></td>
+            <tr th:each="user: ${listUsuarios}" th:object="${user}">
+                <td th:text="*{id}"></td>
+                <td th:text="*{nome}"></td>
+                <td th:text="*{login}"></td>
+                <td th:text="*{email}"></td>
+                <td th:text="*{admin}=='S'?'Sim':'Não'"></td>
+                <td th:text="*{ativo}=='S'?'Sim':'Não'"></td>
+                <td th:text="${#dates.format(user.ultimoAcesso,'dd/MM/yyyy hh:mm:ss')}"></td>
+                <td><a sec:authorize-url="/usuarios/cadastro" th:href="@{/usuarios/cadastro} + '?id=' + *{id}"><i class="fa fa-pencil"/></a></td>
             </tr>
             <tr th:if="${#lists.isEmpty(listUsuarios)}">
                 <td colspan="8">Nenhum Usuário Cadastrado.</td>

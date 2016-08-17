@@ -20,12 +20,9 @@ public class LoginController {
     private ModelAndView home(){
         ModelAndView model = new ModelAndView();
         UsuarioSecurity userSec = new UsuarioSecurity();
-        try {
-
-        } catch (Exception e) {
-            userSec = (UsuarioSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            model.addObject("usuario", userSec);
-        }
+        userSec = (UsuarioSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addObject("userSec", userSec);
+        model.addObject("permissoes", userSec.getPermissoes());
         model.setViewName("home");
         return model;
     }

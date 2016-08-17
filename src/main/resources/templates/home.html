@@ -9,28 +9,26 @@
     <div class="col-lg-12">
         <h1 class="page-header">Home</h1>
     </div>
-    <th:block th:each="permissao : ${usuario.permissoes}" th:if="${permissao.permite == 'S' and permissao.evento.icone != null}">
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i th:class="fa ${permissao.evento.icone} fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div th:text="${permissao.evento.descricao}"></div>
-                            </div>
+    <th:block th:each="permissao : ${permissoes}" th:if="${permissao.evento.icone} != null and (${userSec.admin} == 'S' or ${permissao.permite} == 'S')">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i th:class="'fa '+${permissao.evento.icone}+' fa-5x'"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div th:text="${permissao.evento.descricao}"></div>
                         </div>
                     </div>
-                    <a th:href="${permissao.evento.url}" target="_blank">
-                        <div class="panel-footer">
-                            <span class="pull-left">Abrir Aplicação</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
                 </div>
+                <a th:href="${permissao.evento.url}" target="_blank">
+                    <div class="panel-footer">
+                        <span class="pull-left">Acessar</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
         </div>
     </th:block>

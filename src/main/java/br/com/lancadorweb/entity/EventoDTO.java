@@ -17,10 +17,11 @@ public class EventoDTO implements Serializable{
     public EventoDTO() {
     }
 
-    public EventoDTO(Long id, String descricao, String url, Boolean ativa) {
+    public EventoDTO(Long id, String descricao, String url, String icone, Boolean ativa) {
         this.id = id;
         this.descricao = descricao;
         this.url = url;
+        this.icone = icone;
         this.ativa = ativa;
     }
 

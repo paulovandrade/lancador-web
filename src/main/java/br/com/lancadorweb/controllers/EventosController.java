@@ -66,7 +66,7 @@ public class EventosController {
         try {
             Evento evento = new Evento();
             evento = eventoDAO.buscaEvento(id);
-            model.addObject("evento", (new EventoDTO(evento.getId(), evento.getDescricao(), evento.getUrl(), evento.getAtiva().equals('S')?true:false)));
+            model.addObject("evento", (new EventoDTO(evento.getId(), evento.getDescricao(), evento.getUrl(), evento.getIcone(), evento.getAtiva().equals('S')?true:false)));
             model.addObject("titulo", "Edição de Evento");
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,19 +87,20 @@ public class EventosController {
                 evento = eventoDAO.buscaEvento(eventoDTO.getId().intValue());
                 evento.setDescricao(eventoDTO.getDescricao());
                 evento.setUrl(eventoDTO.getUrl());
+                evento.setIcone(eventoDTO.getIcone());
                 evento.setAtiva(eventoDTO.getAtiva()?'S':'N');
             } else {
                 novo = true;
-                evento = new Evento(eventoDTO.getDescricao(), eventoDTO.getUrl(), eventoDTO.getAtiva()?'S':'N');
+                evento = new Evento(eventoDTO.getDescricao(), eventoDTO.getUrl(), eventoDTO.getIcone(), eventoDTO.getAtiva()?'S':'N');
             }
             Evento eventosalvo = eventoDAO.salvarEvento(evento);
             if (novo) {
                 List<Usuario> usuarioList = new ArrayList<>();
                 usuarioList = usuarioDAO.buscaTodos();
-                for (Usuario usuario : usuarioList) {
+                usuarioList.forEach(usuario -> {
                     Permissao p = new Permissao(usuario, eventosalvo, 'N');
                     permissaoDAO.salvarPermissao(p);
-                }
+                });
             }
             if (eventosalvo != null) {
                 model.addObject("success", "Evento salvo com sucesso!");
